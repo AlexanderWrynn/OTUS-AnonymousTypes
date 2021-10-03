@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,57 +18,49 @@ namespace OTUS_AnonymousTypes
             catalog.Add(new Planet("Mars", 4, "72471355,37 km", catalog[1]));
         }
 
-        public void GetPlanet(string name)
+        public (string, int?, string, string) GetPlanet(string name)
         {
-            int numCoincidence = 0;
             count++;
 
             if (string.IsNullOrEmpty(name))
             {
-                Console.WriteLine("Введена пустая строка");
-                return;
+                return (null, null, null, "Введена пустая строка");
             }
 
             if (count % 3 == 0)
             {
-                Console.WriteLine("Вы спрашиваете слишком часто");
-                return;
+                return (null, null, null, "Вы спрашиваете слишком часто");
             }
 
             for (int i = 0; i < catalog.Count; i++)
             {
                 if (string.Equals(name, catalog[i].Name))
                 {
-                    Console.WriteLine($"Порядковый номер: {catalog[i].NumFromSun}; " +
-                        $"Длина экватора: {catalog[i].EquatorLength}");
-                    numCoincidence++;
+                    return (catalog[i].Name, catalog[i].NumFromSun,
+                            catalog[i].EquatorLength, null);
                 }
             }
 
-            if (numCoincidence == 0)
-                Console.WriteLine("Не удалось найти планету");
+            return (null, null, null, "Не удалось найти планету");
         }
 
-        public void GetPlanet(string name, PlanetValidator planetValidator)
+        public (string, int?, string, string) GetPlanet(string name, PlanetValidator planetValidator)
         {
-            int numCoincidence = 0;
             count++;
 
             if (planetValidator(name, count) != null)
-                return;
+                return (null, null, null, planetValidator(name, count));
 
-                for (int i = 0; i < catalog.Count; i++)
+            for (int i = 0; i < catalog.Count; i++)
+            {
+                if (string.Equals(name, catalog[i].Name))
                 {
-                    if (string.Equals(name, catalog[i].Name))
-                    {
-                        Console.WriteLine($"Порядковый номер: {catalog[i].NumFromSun}; " +
-                            $"Длина экватора: {catalog[i].EquatorLength}");
-                        numCoincidence++;
-                    }
+                    return (catalog[i].Name, catalog[i].NumFromSun,
+                            catalog[i].EquatorLength, null);
                 }
+            }
 
-            if (numCoincidence == 0)
-                Console.WriteLine("Не удалось найти планету");
+            return (null, null, null, "Не удалось найти планету");
         }
 
         public delegate string PlanetValidator(string name, int count);
