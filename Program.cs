@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace OTUS_AnonymousTypes
 {
@@ -60,129 +60,88 @@ namespace OTUS_AnonymousTypes
 
             //Program 2
             var planets = new PlanetsCatalog();
-            planets.GetPlanet("Earth");
-            planets.GetPlanet("Лимпопо");
-            planets.GetPlanet("Venus");
-            planets.GetPlanet(null);
+
+            var firstEarth = planets.GetPlanet("Earth");
+            var firstLimpopo = planets.GetPlanet("Limpopo");
+            var firstMars = planets.GetPlanet("Mars");
+            var firstNull = planets.GetPlanet(null);
+
+            OutputTupleData(firstEarth);
+            OutputTupleData(firstLimpopo);
+            OutputTupleData(firstMars);
+            OutputTupleData(firstNull);
 
             Console.WriteLine("________________________");
             Console.WriteLine();
 
             //Program 3
-            planets.GetPlanet("Earth", (name, count) =>
+            var secondEarth = planets.GetPlanet("Earth", (name, count) =>
             {
                 if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
+                    return "Введена пустая строка";
 
                 if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
+                    return "Вы спрашиваете слишком часто";
+
                 return null;
+
             });
 
-            planets.GetPlanet("Лимпопо", (name, count) =>
+            var secondLimpopo = planets.GetPlanet("Limpopo", (name, count) =>
             {
                 if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
+                    return "Введена пустая строка";
 
                 if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
+                    return "Вы спрашиваете слишком часто";
+
                 return null;
+
             });
 
-            planets.GetPlanet("Venus", (name, count) =>
+            var secondMars = planets.GetPlanet("Mars", (name, count) =>
             {
                 if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
+                    return "Введена пустая строка";
 
                 if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
+                    return "Вы спрашиваете слишком часто";
+
                 return null;
+
             });
 
-            planets.GetPlanet(null, (name, count) =>
+            var secondNull = planets.GetPlanet(null, (name, count) =>
             {
                 if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
+                    return "Введена пустая строка";
 
                 if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
+                    return "Вы спрашиваете слишком часто";
+
                 return null;
+
             });
+
+            OutputTupleData(secondEarth);
+            OutputTupleData(secondLimpopo);
+            OutputTupleData(secondMars);
+            OutputTupleData(secondNull);
 
             Console.WriteLine("________________________");
             Console.WriteLine();
 
             //Program 3*
-            planets.GetPlanet("Earth", (name, count) =>
+            var thirdEarth = planets.GetPlanet("Earth", (name, count) =>
             {
                 if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
+                    return "Введена пустая строка";
 
                 if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
+                    return "Вы спрашиваете слишком часто";
 
                 int counter = 0;
-                for (int i = 0; i < planets.catalog.Count; i++)
-                {
-                    if (string.Equals(name, planets.catalog[i].Name))
-                        counter++;
-                }
 
-                switch (counter) 
-                {
-                    case > 0:
-                        return null;
-                    default:
-                        Console.WriteLine("Это запретная планета");
-                        return "The X-Files theme";
-                }
-            });
-
-            planets.GetPlanet("Лимпопо", (name, count) =>
-            {
-                if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
-
-                if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
-
-                int counter = 0;
                 for (int i = 0; i < planets.catalog.Count; i++)
                 {
                     if (string.Equals(name, planets.catalog[i].Name))
@@ -194,26 +153,20 @@ namespace OTUS_AnonymousTypes
                     case > 0:
                         return null;
                     default:
-                        Console.WriteLine("Это запретная планета");
-                        return "The X-Files theme";
+                        return "Это запретная планета *The X-Files theme*";
                 }
             });
 
-            planets.GetPlanet("Mars", (name, count) =>
+            var thirdLimpopo = planets.GetPlanet("Limpopo", (name, count) =>
             {
                 if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Введена пустая строка");
-                    return "Mistake";
-                }
+                    return "Введена пустая строка";
 
                 if (count % 3 == 0)
-                {
-                    Console.WriteLine("Вы спрашиваете слишком часто");
-                    return "Mistake";
-                }
+                    return "Вы спрашиваете слишком часто";
 
                 int counter = 0;
+
                 for (int i = 0; i < planets.catalog.Count; i++)
                 {
                     if (string.Equals(name, planets.catalog[i].Name))
@@ -225,13 +178,86 @@ namespace OTUS_AnonymousTypes
                     case > 0:
                         return null;
                     default:
-                        Console.WriteLine("Это запретная планета");
-                        return "The X-Files theme";
+                        return "Это запретная планета *The X-Files theme*";
                 }
             });
+
+            var thirdMars = planets.GetPlanet("Mars", (name, count) =>
+            {
+                if (string.IsNullOrEmpty(name))
+                    return "Введена пустая строка";
+
+                if (count % 3 == 0)
+                    return "Вы спрашиваете слишком часто";
+
+                int counter = 0;
+
+                for (int i = 0; i < planets.catalog.Count; i++)
+                {
+                    if (string.Equals(name, planets.catalog[i].Name))
+                        counter++;
+                }
+
+                switch (counter)
+                {
+                    case > 0:
+                        return null;
+                    default:
+                        return "Это запретная планета *The X-Files theme*";
+                }
+            });
+
+            var thirdNull = planets.GetPlanet(null, (name, count) =>
+            {
+                if (string.IsNullOrEmpty(name))
+                    return "Введена пустая строка";
+
+                if (count % 3 == 0)
+                    return "Вы спрашиваете слишком часто";
+
+                int counter = 0;
+
+                for (int i = 0; i < planets.catalog.Count; i++)
+                {
+                    if (string.Equals(name, planets.catalog[i].Name))
+                        counter++;
+                }
+
+                switch (counter)
+                {
+                    case > 0:
+                        return null;
+                    default:
+                        return "Это запретная планета *The X-Files theme*";
+                }
+            });
+
+            OutputTupleData(thirdEarth);
+            OutputTupleData(thirdLimpopo);
+            OutputTupleData(thirdMars);
+            OutputTupleData(thirdNull);
 
             Console.ReadKey(true);
 
+        }
+
+        public static void OutputTupleData((string, int?, string, string) tuple)
+        {
+            string auxiliaryString = "";
+
+            if (tuple.Item1 != null)
+                auxiliaryString += tuple.Item1 + ", ";
+
+            if (tuple.Item2 != null)
+                auxiliaryString +=  tuple.Item2 + ", ";
+
+            if (tuple.Item3 != null)
+                auxiliaryString +=  tuple.Item3 + ", ";
+
+            if (tuple.Item4 != null)
+                auxiliaryString +=  tuple.Item4 + ", ";
+
+            Console.WriteLine(auxiliaryString.Trim(' ').Trim(',')); ;
         }
     }
 }
